@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
 import java.util.function.ToIntFunction;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -40,9 +41,8 @@ public class StreamExercise {
      */
     @Test
     public void task2(){
-        long amount = 0;
+        long amount = people.stream().count();
 
-        //TODO:Write code here
 
         assertEquals(10000, amount);
     }
@@ -52,11 +52,10 @@ public class StreamExercise {
      */
     @Test
     public void task3(){
-        long amount = 0;
+        long amount = people.stream()
+                .filter(person->"Andersson".equals(person.getLastName()))
+                .count();
         int expected = 90;
-
-        //TODO:Write code here
-
         assertEquals(expected, amount);
     }
 
@@ -66,10 +65,9 @@ public class StreamExercise {
     @Test
     public void task4(){
         int expectedSize = 4988;
-        List<Person> females = null;
-
-        //TODO:Write code here
-
+        List<Person> females = people.stream()
+                .filter(p -> p.getGender().equals(Gender.FEMALE))
+                .collect(Collectors.toList());
 
         assertNotNull(females);
         assertEquals(expectedSize, females.size());
